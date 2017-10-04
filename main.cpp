@@ -3,14 +3,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-// #include "bitmap.h"
+#include "bitmap.h"
+#include <cstdlib>  
 
 using namespace std;
 
 int main()
 {
-
-  /*
+/*
 
   -ask user for file name of an image
   -convert image so every pixel is greyscale
@@ -28,7 +28,17 @@ int main()
     //update/save file with different name
     // add, commit, push onto github
 
-cout<<"You're gonna ace this thing."<<endl;
+Bitmap image;
+vector <vector <Pixel> > bmp;
+Pixel rgb;
 
-        return 0;
+image.open("machupicchu.bmp");
+bmp = image.toPixelMatrix();
+
+int numRows = bmp.size();
+int numCols = bmp[0].size();
+
+cout<<"machupicchu.bmp has been loaded. It is "<<numCols<<" pixels wide and "<<numRows<<" pixels high."<<endl;
+
+return 0;
 }
