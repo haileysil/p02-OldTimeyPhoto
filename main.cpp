@@ -51,23 +51,24 @@ int main()
                 {
                         for (int c = 0; c < bmp[r].size(); c++)
                         {
-                        rgb = bmp[r][c];
+                                rgb = bmp[r][c];
 
-                        //convert pixels to black and white
-                        int avgColor = (rgb.red + rgb.green + rgb.blue)/3;
-                        rgb.red = avgColor;
-                        rgb.green = avgColor;
-                        rgb.blue = avgColor;
-                        bmp[r][c] = rgb; 
+                                //convert pixels to black and white
+                                int avgColor = (rgb.red + rgb.green + rgb.blue)/3;
+                                rgb.red = avgColor;
+                                rgb.green = avgColor;
+                                rgb.blue = avgColor;
+                                bmp[r][c] = rgb; 
                         }
 
                 }
-//        image.fromPixelMatrix(bmp);
-//        image.save("machupicchu.bmp");
+                image.fromPixelMatrix(bmp);
+                image.save("OldTimeyPhoto.bmp");
+                image.open("machupicchu.bmp");
         }
         else 
         {
-                cout<<"This file is not a valid image. Please try again or submit a new image."<<endl;
+                cout<<"This file is not a valid image. Please submit a new image."<<endl;
         }
         return 0;
 }
