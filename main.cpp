@@ -12,44 +12,51 @@ int main()
 {
         string imageName;
 
-        //ask user for file name of an image
-        cout<<"What is the name of the image you would like to convert to greyscale?"<<endl;
-       cin>>imageName;
-
         Bitmap image;
-        vector <vector <Pixel> > bmp;
+        vector < vector <Pixel> > bmp;
         Pixel rgb;
 
-        //opens image
-        image.open(imageName);
+        bool validBmp;
 
-        bool validBmp = image.isImage();
-
-        if ( validBmp == true )
+        do
         {
-                bmp = image.toPixelMatrix();
 
-                for (int r = 0; r < bmp.size(); r++)
+                //ask user for file name of an image
+                cout<<"What is the name of the image you would like to convert to greyscale?"<<endl;
+                cin>>imageName;
+
+                //opens image
+                image.open(imageName);
+                
+                validBmp = image.isImage();
+
+                if ( validBmp == true )
                 {
-                        for (int c = 0; c < bmp[r].size(); c++)
+                        bmp = image.toPixelMatrix();
+
+                        for (int r = 0; r < bmp.size(); r++)
                         {
-                                rgb = bmp[r][c];
+                                for (int c = 0; c < bmp[r].size(); c++)
+                                {
+                                        rgb = bmp[r][c];
 
-                                //convert pixels to black and white
-                                int avgColor = (rgb.red + rgb.green + rgb.blue)/3;
-                                rgb.red = avgColor;
-                                rgb.green = avgColor;
-                                rgb.blue = avgColor;
-                                bmp[r][c] = rgb; 
+                                        //convert pixels to black and white
+                                        int avgColor = (rgb.red + rgb.green + rgb.blue)/3;
+                                        rgb.red = avgColor;
+                                        rgb.green = avgColor;
+                                        rgb.blue = avgColor;
+                                        bmp[r][c] = rgb; 
+                                }
+
                         }
-
+                        image.fromPixelMatrix(bmp);
+                        image.save("OldTimeyPhoto.bmp");
                 }
-                image.fromPixelMatrix(bmp);
-                image.save("OldTimeyPhoto.bmp");
-        }
-        else 
-        {
-                cout<<"This file is not a valid image. Please submit a new image."<<endl;
-        }
+                else 
+                {
+                        cout<<"This file is not a valid image. Please submit a new image."<<endl;
+                }
+        } while ( validBmp == false );
+
         return 0;
 }
